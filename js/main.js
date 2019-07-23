@@ -1,3 +1,18 @@
+/**
+ *  Register Service Worker!
+ */
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js').then(function(registration) {
+      // Registration was successful
+      console.log('ServiceWorker registration successful with scope: ', registration.scope);
+    }, function(err) {
+      // registration failed :(
+      console.log('ServiceWorker registration failed: ', err);
+    });
+  });
+}
+
 let restaurants,
   neighborhoods,
   cuisines
@@ -72,14 +87,13 @@ fillCuisinesHTML = (cuisines = self.cuisines) => {
  * Initialize leaflet map, called from HTML.
  */
 initMap = () => {
-  
   self.newMap = L.map('map', {
         center: [40.722216, -73.987501],
         zoom: 12,
         scrollWheelZoom: false
       });
   L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.jpg70?access_token={mapboxToken}', {
-    mapboxToken: 'pk.eyJ1IjoibW9zdGFmYWFud2FyIiwiYSI6ImNqeWY3eXdhNjA3dmMzZnBod3B4bWs3ODAifQ.SydPLpBFr1DSxBIw9uD4_g',
+    mapboxToken: 'pk.eyJ1Ijoib3ZsYWNoaSIsImEiOiJjanh5aDR5MzcwMXgyM2dvYjh4bzg3aG9nIn0.I7pTeWbnr-mnYSu8j2dYlw',
     maxZoom: 18,
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
       '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
@@ -162,10 +176,12 @@ createRestaurantHTML = (restaurant) => {
   const image = document.createElement('img');
   image.className = 'restaurant-img';
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
+  image.alt = `${restaurant.name} Restaurant`;
   li.append(image);
 
-  const name = document.createElement('h1');
+  const name = document.createElement('h2');
   name.innerHTML = restaurant.name;
+  name.setAttribute('tabindex', '0');
   li.append(name);
 
   const neighborhood = document.createElement('p');
@@ -179,6 +195,7 @@ createRestaurantHTML = (restaurant) => {
   const more = document.createElement('a');
   more.innerHTML = 'View Details';
   more.href = DBHelper.urlForRestaurant(restaurant);
+  more.setAttribute('aria-label', `More details about ${restaurant.name}`)
   li.append(more)
 
   return li
@@ -209,3 +226,4 @@ addMarkersToMap = (restaurants = self.restaurants) => {
     self.markers.push(marker);
   });
 } */
+
