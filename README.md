@@ -22,4 +22,4 @@ If you don't have Python in your PC and willing to try the project locally, you 
       * Open [this link](http://localhost:8000/) in your browser.
 2. Online
       * You can see a live version through this [Link](https://mostafaanwar.github.io/RestaurantReviewsApp/)
-     (still under work).
+     (trying to find another host because github blocks google apis).
