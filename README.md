@@ -13,13 +13,13 @@ If you don't have Python in your PC and willing to try the project locally, you 
       
        for python version 2.x use this command :
 
-         python -m SimpleHTTPServer 8000
+         python -m SimpleHTTPServer 5000
 
         for python 3.7.x use this command :
 
-         py -m http.server 8000
+         py -m http.server 5000
        
-      * Open [this link](http://localhost:8000/) in your browser.
+      * Open [this link](http://localhost:5000/) in your browser.
 2. Online
       * You can see a live version through this [Link](https://mostafaanwar.github.io/RestaurantReviewsApp/)
      (trying to find another host because github blocks google apis).
